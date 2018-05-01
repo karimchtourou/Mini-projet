@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://utraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template">
+<head>
+<meta charset="utf-8" />
+<title>Accueil</title>
+<script type="text/javascript">
+ function verifdate(){
+
+ dd=document.getElementById('datedeb').value;
+ df=document.getElementById('datefin').value;
+ if (dd>df)
+  alert("date fin doit etre supérieur à la date de début");
+
+
+return (true);
+ }
+ </script>
+<script type="text/javascript">
+ function verifdate2(){
+
+ dd=document.getElementById('datedeb').value;
+ var date = new Date();
+ if (date>dd)
+  alert("date de début doit etre supérieur à la date systeme");
+
+
+return (true);
+ }
+ </script>
+</head>
+
+<body>
+	<div layout:fragment="title">
+		<h2>Ajouter un séjour</h2>
+	</div>
+	<div layout:fragment="content">
+<div th:if="${param.message}"  class="price">Sejour ajouté avec succes</div>
+
+
+		<form id="demo-form2" th:action="@{/ajoutSejour}" method="post"
+			class="form-horizontal form-label-left">
+
+
+			<div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Description
+					<span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<input type="text" name="desc" id="desc" required="required"
+						class="form-control col-md-7 col-xs-12" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="prix">Prix<span
+					class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<input type="number" name="prix" id="prix" required="required"
+						class="form-control col-md-7 col-xs-12" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lieu">Lieu<span
+					class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<input type="text" name="lieu" id="lieu" required="required"
+						class="form-control col-md-7 col-xs-12" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12"
+					for="nbPlace">Nombre de Places<span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<input type="number" name="nbPlace" id="nbPlace" required="required"
+						class="form-control col-md-7 col-xs-12" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Date
+					Début<span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<input type="date" id="datedeb" name="datedb"  onchange="verifdate2()"
+						class="form-control col-md-7 col-xs-12" required="required" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Date
+					fin<span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<input type="date" id="datefin" name="datefin" onchange="verifdate()"
+						class="form-control col-md-7 col-xs-12" required="required" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Activite</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<select name="activites" multiple="multiple" class="form-control">
+						<option th:each="o:${activites}" th:value="${o.id_activite}" th:text="${o.description}"></option>
+					</select>
+					<div class="ln_solid"></div>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+					<button type="submit" class="btn btn-success">Ajouter</button>
+
+					<button class="btn btn-primary" type="reset">Annuler</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://utraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template">
+<head>
+<meta charset="utf-8" />
+<title>Accueil</title>
+</head>
+<body>
+	<div layout:fragment="title">
+		<h2>Ajouter un activte</h2>
+		
+	</div>
+	
+	<div layout:fragment="content">
+	<a th:href="@{/report}" target="_blank" > click here to view the report !</a>
+		<div class="col-md-6">
+
+			<div th:if="${param.message}" class="price">Activité ajouté
+				avec succes</div>
+			<form id="demo-form2" th:action="@{/ajoutActivite}" method="post"
+				class="form-horizontal form-label-left">
+
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Description
+						<span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input type="text" name="desc" id="desc" required="required"
+							class="form-control col-md-7 col-xs-12" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12"
+						for="libelle">Libelle<span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input type="text" name="libelle" id="libelle" required="required"
+							class="form-control col-md-7 col-xs-12" />
+					</div>
+				</div>
+				
+		<div class="form-group">
+			<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+				<button type="submit" class="btn btn-success">Ajouter</button>
+
+				<button class="btn btn-primary" type="reset">Annuler</button>
+			</div>
+		</div>
+			</form>
+		</div>
+
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>Liste des activites</h2>
+
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Description</th>
+								<th>Libelle</th>
+								<th>Supprimer</th>
+
+
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr th:each="o:${activites}">
+								<td th:text="${o.description}"></td>
+								<td th:text="${o.libelle}"></td>
+								<td><form th:action="@{/supActivite}" method="post" ><input type="hidden" name="id" th:value="${o.id_activite}"/> <input type="submit" value="supprimer"/></form> </td>
+
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+</body>
+</html>

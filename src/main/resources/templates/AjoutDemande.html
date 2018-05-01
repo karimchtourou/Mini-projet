@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://utraq.net.nz/thymeleaf/layout"
+	layout:decorator="Template">
+<head>
+<meta charset="utf-8" />
+<title>Accueil</title>
+</head>
+<body>
+	<div layout:fragment="title">
+		<h2>Ajouter demande de séjour</h2>
+	</div>
+
+	<div layout:fragment="content">
+<div th:if="${param.message}"  class="price">Demande ajoutée avec succes</div>
+
+
+		<form id="demo-form2" th:action="@{/ajoutDemande}" method="post"
+			class="form-horizontal form-label-left">
+			<div class="col-md-6">
+
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12"
+						for="ville">Ville depart<span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input type="text" name="ville" id="ville" required="required"
+							class="form-control col-md-7 col-xs-12" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Date
+						départ <span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<input type="date" id="birthday" name="date"
+							class="form-control col-md-7 col-xs-12" required="required" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Enfant</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<select name="enfant" class="form-control">
+							<option th:each="o:${enfants}" th:value="${o.id}"
+								th:text="${o.nom}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Choix
+						Séjour 1</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<select name="choix1" class="form-control">
+							<option th:each="o:${sejours}" th:value="${o.reference}"
+								th:text="${o.reference}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Choix
+						Séjour 2</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<select name="choix2" class="form-control">
+							<option th:each="o:${sejours}" th:value="${o.reference}"
+								th:text="${o.reference}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Choix
+						Séjour 3</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<select name="choix3" class="form-control">
+							<option th:each="o:${sejours}" th:value="${o.reference}"
+								th:text="${o.reference}"></option>
+						</select>
+						<div class="ln_solid"></div>
+					</div>
+				</div>
+				<div class="ln_solid"></div>
+
+			</div>
+
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+						Liste des Sejours disponibles
+						</h2>
+
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Reference</th>
+									<th>Date depart</th>
+									<th>Date fin</th>
+									<th>Lieu</th>
+									<th>Prix</th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr th:each="o:${sejours}">
+									<td th:text="${o.reference}"></td>
+									<td th:text="${o.dateDeb}"></td>
+									<td th:text="${o.dateFin}"></td>
+									<td th:text="${o.lieu}"></td>
+									<td th:text="${o.prix}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+					<button type="submit" class="btn btn-success">Ajouter</button>
+
+					<button class="btn btn-primary" type="reset">Annuler</button>
+				</div>
+			</div>
+		</form>
+
+
+
+	</div>
+</body>
+</html>
